@@ -18,15 +18,12 @@ Uri buildUri(String token, String apiMethod,
         path: 'bot$token/$apiMethod',
         queryParameters: args);
 
-/// TODO(kharland): support more than just get.
-/// TODO(kharland): evaluate the initial response for errors.
 Future<Map<String, Object>> requestUri(Uri uri) async {
   var response = await http.get('$uri');
   var apiResponse;
   try {
     apiResponse = new JsonDecoder().convert(response.body);
   } catch (e) {
-    /// TODO(kharland): wrap this in log function
     stderr.write('[telegram_bot:requestUri] $e');
   }
 
