@@ -1,4 +1,4 @@
-library telegram.bot;
+library telegram_bot;
 
 import 'package:telegram_bot/api/api.dart' as api;
 
