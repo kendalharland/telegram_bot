@@ -142,7 +142,7 @@ Future<Message> sendAudio(String token, int chatId, dynamic audio,
 /// Use this method to send general files. On success, the sent Message is
 /// returned. Bots can currently send files of any type of up to 50 MB in size,
 /// this limit may be changed in the future.
-Future<Message> sendDocument(String token, int chatId, document,
+Future<Message> sendDocument(String token, int chatId, dynamic document,
     {int replyToMessageId, dynamic replyMarkup}) {
   _forceType(document, [String, InputFile]);
   var args = {'chat_id': '$chatId', 'document': '$document'};

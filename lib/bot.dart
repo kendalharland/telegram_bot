@@ -1,10 +1,11 @@
 library telegram_bot;
 
+import 'dart:async';
 import 'package:telegram_bot/api/api.dart' as api;
 
-class TelegramBot implements api.User {
+class TelegramBot {
   final String token;
-  User _self;
+  api.User _self;
 
   TelegramBot(this.token);
 
@@ -21,10 +22,10 @@ class TelegramBot implements api.User {
   @override
   String get firstName => _self.firstName;
 
-  Future<List<Updates>> getUpdates({int offset, int limit, int timeout}) =>
+  Future<List<api.Update>> getUpdates({int offset, int limit, int timeout}) =>
       api.getUpdates(token, offset: offset, limit: limit, timeout: timeout);
 
-  Future<Message> sendMessage(int chatId, String text,
+  Future<api.Message> sendMessage(int chatId, String text,
           {String parseMode,
           bool disableWebPagePreview,
           int replyToMessageId}) =>
@@ -32,4 +33,31 @@ class TelegramBot implements api.User {
           parseMode: parseMode,
           disableWebPagePreview: disableWebPagePreview,
           replyToMessageId: replyToMessageId);
+
+  Future<api.Message> forwardMessge(
+          int chatId, int fromChatId, int messageId) =>
+      api.forwardMessage(token, chatId, fromChatId, messageId);
+
+  Future<api.Message> sendPhoto(int chatId, dynamic photo,
+          {String caption, int replyToMessageId, dynamic replyMarkup}) =>
+      api.sendPhoto(token, chatId, photo,
+          caption: caption, replyToMessageId: replyToMessageId);
+
+  Future<api.Message> sendAudio(int chatId, dynamic audio,
+          {int duration,
+          String performer,
+          String title,
+          int replyToMessageId,
+          dynamic replyMarkup}) =>
+      api.sendAudio(token, chatId, audio,
+          duration: duration,
+          performer: performer,
+          title: title,
+          replyToMessageId: replyToMessageId,
+          replyMarkup: replyMarkup);
+
+  Future<api.Message> sendDocument(int chatId, document,
+          {int replyToMessageId, dynamic replyMarkup}) =>
+      api.sendDocument(token, chatId, document,
+          replyToMessageId: replyToMessageId, replyMarkup: replyMarkup);
 }
