@@ -60,8 +60,7 @@ Future<Message> sendMessage(String token, int chatId, String text,
     args['reply_to_message_id'] = '$replyToMessageId';
   }
 
-  var messageMap = await requestMethod('sendMessage', token, args: args);
-  return new Message(messageMap);
+  return requestMethod('sendMessage', token, args: args).then(Message.create);
 }
 
 /// Use this method to forward messages of any kind. On success, the sent
