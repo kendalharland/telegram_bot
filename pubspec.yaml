@@ -1,0 +1,4 @@
+name: 'telegram_bot'
+dependencies:
+ json: any
+ http: any
