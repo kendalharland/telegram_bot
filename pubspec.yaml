@@ -1,4 +1,11 @@
-name: 'telegram_bot'
+name: telegram_bot
+version: 0.0.0
+authors:
+ - Kendal Harland <kendaljharland@gmail.com>
+description: A Dart wrapper for the Telegram Bot API
+homepage: https://github.com/kharland/telegram_bot
 dependencies:
  json: any
  http: any
+dev_dependencies:
+ unittest: any
