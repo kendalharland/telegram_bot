@@ -2,7 +2,7 @@ library telegram_bot.api;
 
 import 'dart:async';
 
-import 'package:telegram_bot/rpc.dart';
+import 'package:telegram_bot/api/rpc.dart';
 import 'package:telegram_bot/api/objects.dart';
 
 export 'package:telegram_bot/api/objects.dart';
