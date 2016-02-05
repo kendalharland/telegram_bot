@@ -6,10 +6,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 const API_HOST = 'api.telegram.org';
+const DEFAULT_SCHEME = 'http';
 
 Uri buildUri(String token, String apiMethod,
         {Map<String, String> args,
-        String scheme: 'http',
+        String scheme: DEFAULT_SCHEME,
         String host: API_HOST}) =>
     new Uri(
         scheme: scheme,
