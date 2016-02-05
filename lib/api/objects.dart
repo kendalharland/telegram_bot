@@ -1,4 +1,4 @@
-library telegram_bot.api.objects.dart;
+library telegram_bot.api.objects;
 
 class APIObject {
   Map<String, Object> _map;
