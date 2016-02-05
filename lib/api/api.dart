@@ -118,13 +118,13 @@ Future<Message> sendAudio(String token, int chatId, dynamic audio,
   var args = {'chat_id': '$chatId', 'audio': '$audio',};
 
   if (duration != null) {
-    audio['duration'] = '$duration';
+    args['duration'] = '$duration';
   }
   if (performer != null) {
-    audio['performer'] = performer;
+    args['performer'] = performer;
   }
   if (title != null) {
-    audio['title'] = title;
+    args['title'] = title;
   }
   if (replyToMessageId != null) {
     args['reply_to_message_id'] = '$replyToMessageId';
