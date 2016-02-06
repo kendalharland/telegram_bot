@@ -27,12 +27,12 @@ class Audio extends APIObject {
 class Chat extends APIObject {
   Chat(Map<String, Object> map) : super(map);
 
-  int id get => super['id'];
-  String type get => super['type'];
-  String title get => super['title'];
-  String username get => super['username'];
-  String firstName get => super['first_name'];
-  String lastName get => super['last_name'];
+  int get id => super['id'];
+  String get type => super['type'];
+  String get title => super['title'];
+  String get username => super['username'];
+  String get firstName => super['first_name'];
+  String get lastName => super['last_name'];
 }
 
 class ChosenInlineResult extends APIObject {
