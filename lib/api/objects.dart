@@ -236,7 +236,7 @@ class Update extends APIObject {
     }
   }
 
-  int get id => super['update_id'];
+  int get updateId => super['update_id'];
   Message get message => super['message'];
   InlineQuery get inlineQuery => super['inline_query'];
   ChosenInlineResult get chosenInlineResult => super['chosen_inline_result'];
