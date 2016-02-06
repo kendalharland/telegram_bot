@@ -1,4 +1,4 @@
-library telegram_bot.rpc;
+library telegram_bot.api.rpc;
 
 import 'dart:async';
 import 'dart:io';
