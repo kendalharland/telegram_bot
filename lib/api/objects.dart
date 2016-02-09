@@ -71,6 +71,8 @@ class Document extends APIObject {
 }
 
 class File extends APIObject {
+  static File create(Map<String, Object> map) => new File(map);
+
   File(Map<String, Object> map) : super(map);
 
   String get fileId => super['file_id'];
@@ -254,6 +256,9 @@ class User extends APIObject {
 }
 
 class UserProfilePhotos extends APIObject {
+  static UserProfilePhotos create(Map<String, Object> map) =>
+      new UserProfilePhotos(map);
+
   UserProfilePhotos(Map<String, Object> map) : super(map);
 
   int get totalCount => super['total_count'];
