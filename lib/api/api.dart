@@ -2,16 +2,15 @@ library telegram_bot.api;
 
 import 'dart:async';
 
-import 'package:telegram_bot/api/rpc.dart';
+import 'package:telegram_bot/rpc/rpc.dart';
 import 'package:telegram_bot/api/objects.dart';
 
 export 'package:telegram_bot/api/objects.dart';
 
-void _forceType(object, List<Type> types) {
-  if (!types.any((Type T) => object.runtimeType == T)) {
-    throw new TypeError();
-  }
-}
+/// Convenience method.
+Future<Map<String, Object>> requestMethod(String method, String token,
+        {Map<String, String> args: const {}}) =>
+    requestUri(buildUri(token, method, args: args));
 
 /// A simple method for testing your bot's auth token. Requires no parameters.
 /// Returns basic information about the bot in form of a User object.
@@ -155,4 +154,10 @@ Future<Message> sendDocument(String token, int chatId, dynamic document,
     args['reply_markup'] = '$replyMarkup';
   }
   return requestMethod('sendDocument', token, args: args).then(Message.create);
+}
+
+void _forceType(object, List<Type> types) {
+  if (!types.any((Type T) => object.runtimeType == T)) {
+    throw new TypeError();
+  }
 }
