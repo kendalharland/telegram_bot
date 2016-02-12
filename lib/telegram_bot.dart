@@ -22,6 +22,8 @@ class TelegramBot {
   @override
   String get firstName => _self.firstName;
 
+  Future<List<api.User>> getMe() => api.getMe(token);
+
   Future<List<api.Update>> getUpdates({int offset, int limit, int timeout}) =>
       api.getUpdates(token, offset: offset, limit: limit, timeout: timeout);
 
@@ -60,4 +62,39 @@ class TelegramBot {
           {int replyToMessageId, dynamic replyMarkup}) =>
       api.sendDocument(token, chatId, document,
           replyToMessageId: replyToMessageId, replyMarkup: replyMarkup);
+
+  Future<api.Message> sendSticker(int chatId, dynamic sticker,
+          {int replyToMessageId, dynamic replyMarkup}) =>
+      api.sendSticker(token, chatId, sticker,
+          replyToMessageId: replyToMessageId, replyMarkup: replyMarkup);
+
+  Future<api.Message> sendVideo(int chatId, dynamic video,
+          {int duration,
+          String caption,
+          int replyToMessageId,
+          dynamic replyMarkup}) =>
+      api.sendVideo(token, chatId, video,
+          duration: duration,
+          caption: caption,
+          replyToMessageId: replyToMessageId,
+          replyMarkup: replyMarkup);
+
+  Future<api.Message> sendVoice(int chatId, dynamic voice,
+          {int duration,
+          int replyToMessageId,
+          dynamic replyMarkup}) =>
+      api.sendVideo(token, chatId, voice,
+          duration: duration,
+          replyToMessageId: replyToMessageId,
+          replyMarkup: replyMarkup);
+
+  Future<api.Message> sendLocation(int chatId, int latitude, int longitude,
+          int replyToMessageId,
+          dynamic replyMarkup}) =>
+      api.sendVideo(token, chatId, latitude, longitude,
+          replyToMessageId: replyToMessageId,
+          replyMarkup: replyMarkup);
+
+  Future<api.UserProfilePhotos> getUserProfilePhotos(int userId, {int offset, int limit}) =>
+    api.getUserProfilePhotos(token, userId, offset: offset, limit: limit);
 }

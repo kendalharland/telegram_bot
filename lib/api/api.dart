@@ -7,8 +7,6 @@ import 'package:telegram_bot/api/objects.dart';
 
 export 'package:telegram_bot/api/objects.dart';
 
-/// TODO(kharland): create typedef for requestUri to make testing easier
-
 /// Convenience method.
 Future<Map<String, Object>> requestMethod(String method, String token,
         {Map<String, String> args: const {}}) =>
@@ -26,13 +24,14 @@ Future<Message> sendMessage(String token, int chatId, String text,
     bool disableWebPagePreview: false,
     int replyToMessageId,
     dynamic replyMarkup}) async {
-  var args = {
-    'chat_id': '$chatId',
-    'text': text,
-    'parse_mode': parseMode,
-    'disable_web_page_preview': '$disableWebPagePreview',
-  };
+  var args = <String, String>{'chat_id': '$chatId', 'text': text};
 
+  if (parseMode != null) {
+    args['parse_mode'] = '$parseMode';
+  }
+  if (disableWebPagePreview != null) {
+    args['disable_web_page_preview'] = '$disableWebPagePreview';
+  }
   if (replyToMessageId != null) {
     args['reply_to_message_id'] = '$replyToMessageId';
   }
@@ -49,7 +48,7 @@ Future<Message> sendMessage(String token, int chatId, String text,
 /// Message is returned.
 Future<Message> forwardMessage(
     String token, int chatId, int fromChatId, int messageId) {
-  var args = {
+  var args = <String, String>{
     'chat_id': '$chatId',
     'from_chat_id': '$fromChatId',
     'message_id': '$messageId'
@@ -63,7 +62,7 @@ Future<Message> forwardMessage(
 Future<Message> sendPhoto(String token, int chatId, dynamic photo,
     {String caption, int replyToMessageId, dynamic replyMarkup}) {
   _forceType(photo, [String, InputFile]);
-  var args = {'chat_id': '$chatId', 'photo': '$photo',};
+  var args = <String, String>{'chat_id': '$chatId', 'photo': '$photo',};
 
   if (caption != null) {
     args['caption'] = caption;
@@ -97,7 +96,7 @@ Future<Message> sendAudio(String token, int chatId, dynamic audio,
     int replyToMessageId,
     dynamic replyMarkup}) {
   _forceType(audio, [String, InputFile]);
-  var args = {'chat_id': '$chatId', 'audio': '$audio',};
+  var args = <String, String>{'chat_id': '$chatId', 'audio': '$audio',};
 
   if (duration != null) {
     args['duration'] = '$duration';
@@ -126,7 +125,7 @@ Future<Message> sendAudio(String token, int chatId, dynamic audio,
 Future<Message> sendDocument(String token, int chatId, dynamic document,
     {int replyToMessageId, dynamic replyMarkup}) {
   _forceType(document, [String, InputFile]);
-  var args = {'chat_id': '$chatId', 'document': '$document'};
+  var args = <String, String>{'chat_id': '$chatId', 'document': '$document'};
 
   if (replyToMessageId != null) {
     args['reply_to_message_id'] = '$replyToMessageId';
@@ -143,7 +142,7 @@ Future<Message> sendDocument(String token, int chatId, dynamic document,
 /// returned.
 Future<Message> sendSticker(String token, int chatId, dynamic sticker,
     {int replyToMessageId, dynamic replyMarkup}) {
-  var args = {'chat_id': '$chatId'};
+  var args = <String, String>{'chat_id': '$chatId'};
 
   _forceType(sticker, [InputFile, String]);
   args['sticker'] = sticker;
@@ -166,7 +165,7 @@ Future<Message> sendSticker(String token, int chatId, dynamic sticker,
 /// limit may be changed in the future.
 Future<Message> sendVideo(String token, int chatId, dynamic video,
     {int duration, String caption, int replyToMessageId, dynamic replyMarkup}) {
-  var args = {'chat_id': '$chatId'};
+  var args = <String, String>{'chat_id': '$chatId'};
 
   _forceType(video, [InputFile, String]);
   args['video'] = video;
@@ -197,7 +196,7 @@ Future<Message> sendVideo(String token, int chatId, dynamic video,
 /// changed in the future.
 Future<Message> sendVoice(String token, int chatId, dynamic voice,
     {int duration, int replyToMessageId, dynamic replyMarkup}) {
-  var args = {'chat_id': '$chatId'};
+  var args = <String, String>{'chat_id': '$chatId'};
 
   _forceType(voice, [InputFile, String]);
   args['voice'] = voice;
@@ -222,7 +221,7 @@ Future<Message> sendVoice(String token, int chatId, dynamic voice,
 Future<Message> sendLocation(
     String token, int chatId, double latitude, double longitude,
     {int replyToMessageId, dynamic replyMarkup}) {
-  var args = {
+  var args = <String, String>{
     'chat_id': '$chatId',
     'latitude': '$latitude',
     'logitude': '$longitude'
@@ -246,7 +245,7 @@ Future<Message> sendLocation(
 /// UserProfilePhotos object.
 Future<UserProfilePhotos> getUserProfilePhotos(String token, int userId,
     {int offset, int limit}) {
-  var args = {'user_id': '$userId'};
+  var args = <String, String>{'user_id': '$userId'};
 
   if (offset != null) {
     args['offset'] = '$offset';

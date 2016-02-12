@@ -48,4 +48,3 @@ Future<Map<String, Object>> requestUri(Uri uri, {Request request: GET}) async {
 
 Future<String> GET(Uri uri) async => (await http.get('$uri')).body;
 Future<String> POST(Uri uri) async => (await http.post('$uri')).body;
-
