@@ -62,7 +62,10 @@ Future<Message> forwardMessage(
 Future<Message> sendPhoto(String token, int chatId, dynamic photo,
     {String caption, int replyToMessageId, dynamic replyMarkup}) {
   _forceType(photo, [String, InputFile]);
-  var args = <String, String>{'chat_id': '$chatId', 'photo': '$photo',};
+  var args = <String, String>{
+    'chat_id': '$chatId',
+    'photo': '$photo',
+  };
 
   if (caption != null) {
     args['caption'] = caption;
@@ -96,7 +99,10 @@ Future<Message> sendAudio(String token, int chatId, dynamic audio,
     int replyToMessageId,
     dynamic replyMarkup}) {
   _forceType(audio, [String, InputFile]);
-  var args = <String, String>{'chat_id': '$chatId', 'audio': '$audio',};
+  var args = <String, String>{
+    'chat_id': '$chatId',
+    'audio': '$audio',
+  };
 
   if (duration != null) {
     args['duration'] = '$duration';

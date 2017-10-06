@@ -13,24 +13,28 @@ class TelegramBot {
     _self = await api.getMe(token);
   }
 
-  @override
   int get id => _self.id;
 
-  @override
   String get username => _self.username;
 
-  @override
   String get firstName => _self.firstName;
 
-  Future<List<api.User>> getMe() => api.getMe(token);
+  Future<api.User> getMe() => api.getMe(token);
 
-  Future<List<api.Update>> getUpdates({int offset, int limit, int timeout}) =>
+  Future<List<api.Update>> getUpdates({
+    int offset,
+    int limit: 100,
+    int timeout: 0,
+  }) =>
       api.getUpdates(token, offset: offset, limit: limit, timeout: timeout);
 
-  Future<api.Message> sendMessage(int chatId, String text,
-          {String parseMode,
-          bool disableWebPagePreview,
-          int replyToMessageId}) =>
+  Future<api.Message> sendMessage(
+    int chatId,
+    String text, {
+    String parseMode: 'Markdown',
+    bool disableWebPagePreview: false,
+    int replyToMessageId,
+  }) =>
       api.sendMessage(token, chatId, text,
           parseMode: parseMode,
           disableWebPagePreview: disableWebPagePreview,
@@ -80,21 +84,19 @@ class TelegramBot {
           replyMarkup: replyMarkup);
 
   Future<api.Message> sendVoice(int chatId, dynamic voice,
-          {int duration,
-          int replyToMessageId,
-          dynamic replyMarkup}) =>
+          {int duration, int replyToMessageId, dynamic replyMarkup}) =>
       api.sendVideo(token, chatId, voice,
           duration: duration,
           replyToMessageId: replyToMessageId,
           replyMarkup: replyMarkup);
 
-  Future<api.Message> sendLocation(int chatId, int latitude, int longitude,
-          int replyToMessageId,
-          dynamic replyMarkup}) =>
-      api.sendVideo(token, chatId, latitude, longitude,
-          replyToMessageId: replyToMessageId,
-          replyMarkup: replyMarkup);
+  Future<api.Message> sendLocation(
+          int chatId, double latitude, double longitude,
+          {int replyToMessageId, dynamic replyMarkup}) =>
+      api.sendLocation(token, chatId, latitude, longitude,
+          replyToMessageId: replyToMessageId, replyMarkup: replyMarkup);
 
-  Future<api.UserProfilePhotos> getUserProfilePhotos(int userId, {int offset, int limit}) =>
-    api.getUserProfilePhotos(token, userId, offset: offset, limit: limit);
+  Future<api.UserProfilePhotos> getUserProfilePhotos(int userId,
+          {int offset, int limit}) =>
+      api.getUserProfilePhotos(token, userId, offset: offset, limit: limit);
 }
